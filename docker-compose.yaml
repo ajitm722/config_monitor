@@ -1,0 +1,20 @@
+version: "3.9"
+
+services:
+  config-watcher:
+    build:
+      context: . # Specifies the build context as the current directory
+      dockerfile: Dockerfile # Specifies the Dockerfile to use for building the image
+    volumes:
+      # Mounts the local chaotic_file into the container at /root/chaotic_file
+      # This ensures any changes made to chaotic_file on the host are reflected in the container
+      - ./chaotic_file:/root/chaotic_file
+      # Mounts the local config.yaml into the container at /root/config.yaml
+      # This allows you to update the configuration without rebuilding the container
+      - ./config.yaml:/root/config.yaml
+    entrypoint:
+      # Ensures the container runs the config-watcher binary on startup
+      - ./config-watcher
+    stdin_open: true # Keeps the container interactive (useful for debugging)
+    tty: true # Allocates a pseudo-TTY for interactive use
+

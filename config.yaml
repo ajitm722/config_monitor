@@ -1,0 +1,2 @@
+file_path: "./chaotic_file"
+watch_method: "osnotify" # Toggle between polling and osnotify methods
